@@ -1,0 +1,221 @@
+
+<!-- <html>
+<input id="liss">
+<button onclick="add()">Add</button>
+<ul id="lit">
+    <li>hello
+    <button onclick="deleteitem(event)">delete</button>
+</li>
+</ul>
+<script>
+    var ul=document.getElementById("lit");
+    var input=document.getElementById("liss");
+    function add(){
+        var list=document.createElement("li")
+        list.innerHTML=input.value +"<button onclick='deleteitem(event)'>delete</button>" 
+        ul.append(list)
+        console.log(list)
+       }
+       function deleteitem(event)
+       {
+        event.target.parentElement.remove()
+       }
+
+</script>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <style>
+        *{
+            margin:0px;
+            padding: 0px;
+        }
+        .navbar{
+            background-color: red;
+            padding:10px;
+            
+        }
+        .container{
+            padding:10px;
+            display: flex ;
+        }
+        .booksky-content{
+            background-color: black;
+            padding:20px;
+            margin:30px;
+            width:400px;
+            height: 300px;
+            color:white;
+            border-radius: 20px;
+            
+        }
+        .booksky-content>h1{
+            color:red;
+        }
+    h2{
+        color:red;
+    }    
+    p{
+        color:white;
+        font-size: 20px;
+    }
+     .booksky-content button{
+        color:red;
+        padding:5px;
+        margin-top: 10px;
+
+    }
+    .plus{
+        position: absolute;
+        right:5%;
+        bottom:10%;
+        background-color: red;
+        color:black;
+        font-size: 40px;
+        border-radius: 100%;
+        padding: 20px;
+        
+    }
+    .input-data{
+        padding:40px;
+        position: absolute;
+        left: 40%;
+        top:40%;
+        background-color: red;
+        width:20%;
+        border-radius: 20px;
+        z-index: 2;
+        display: none;
+       }
+     
+    .input-data h2{
+        color:black;
+        text-align: center;
+     }
+    input,textarea{
+        border: none;
+        padding: 5px;
+        margin: 5px;
+        background: transparent;
+        color: black;
+        width:100%;
+        border-bottom: 2px solid black;
+        
+    }
+    textarea{
+        border: 2px solid black;
+    }
+    input::placeholder{
+    color: black;
+    }
+    textarea::placeholder{
+        color: black;
+    }
+    .input-data button {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border: none;
+    }
+    input:focus{
+        outline: none;
+    }
+    textarea:focus{
+        outline: none;
+    }
+    .popup-overlay{
+        background-color: black;
+        opacity: 0.8;
+        width:100%;
+        height:100%;
+        position: absolute;
+        top:0px;
+        left:0px;
+        display: none;
+        z-index: 1;
+        
+    }
+    </style>
+</head>
+<body>
+   <div class="navbar">
+    <h1>BOOKSKY</h1>
+   </div>
+   <div class="container">
+    <div class="booksky-content">
+    <h1>
+        RICH DAD POOR DAD
+    </h1>
+    <h2>Robert</h2>
+    <p>
+     Lorem ipsum dolor sit amet consectetur adipisicing elit. Vluptates repellat numquam quia cum soluta? Ea rerum quia quidem obcaecati repudiandae ipsam quas. Corrupti explicabo sequi culpa, vero iste pariatur placeat!Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Vluptates repellat numquam quia cum soluta? Ea rerum quia quidem obcaecati repudiandae ipsam quas.
+    </p>
+    <button class="btn" onclick="deleteitem(event)">
+      DELETE
+    </button></div>
+   </div> 
+   <div class="popup-overlay">
+
+   </div>
+   <div class="input-data">
+    <form >
+        <h2>ADD BOOK</h2>
+    <input type="text" placeholder="BOOK-TITLE" id="title">
+    <input type="text" placeholder="BOOK-AUTHOR" id="author">
+    <textarea placeholder="SHORT-DESCRIPTION" id="shortdescription"></textarea>
+    <button class="add">ADD</button>
+    <button class="cancel">CANCEL</button>
+   </form>
+   </div>
+   <button class="plus">+</button> 
+   
+   
+   <script>
+    var dlt=document.querySelector(".btn");
+    function deleteitem(event){
+        event.target.parentElement.remove()
+    }
+    
+    var input=document.querySelector(".input-data");
+    var pop=document.querySelector(".popup-overlay");
+    var btn=document.querySelector(".plus");
+    btn.addEventListener("click",function(){
+        pop.style.display="block";
+        input.style.display="block";
+    })
+    // 
+    var cancel=document.querySelector(".cancel")
+    cancel.addEventListener("click",function(event){
+        event.preventDefault();
+        pop.style.display="none";
+        input.style.display="none";
+    })
+    // 
+    
+    var container=document.querySelector(".container");
+    var add=document.querySelector(".add");
+    var title=document.querySelector("#title");
+    var author=document.querySelector("#author");
+    var area=document.querySelector("#shortdescription");
+    add.addEventListener("click",function(event){
+        event.preventDefault();
+        pop.style.display="none";
+        input.style.display="none";
+        var div=document.createElement("div");
+        div.setAttribute("class","booksky-content")
+        div.innerHTML=`<h1>${title.value}</h1>
+        <h2>${author.value}</h2>
+        <p>${area.value}</p>
+        <button onclick="deleteitem(event)">DELETE</button>`
+
+        container.append(div)
+
+    })
+   
+   </script>
+</body>
+</html>
